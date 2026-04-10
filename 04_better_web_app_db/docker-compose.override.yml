@@ -1,0 +1,30 @@
+name: web_app_db-dev
+
+services:
+  app:
+    image: web_app_db:dev
+    build:
+      context: .
+      target: dev
+    entrypoint: ["fastapi", "dev", "--host", "0.0.0.0", "main.py"]
+    environment:
+      - DATABASE_URL=postgresql+psycopg://user:password@db:5432/app
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:17
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=app
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - db_network
+
+volumes:
+  db_data:
+
+networks:
+  db_network:
