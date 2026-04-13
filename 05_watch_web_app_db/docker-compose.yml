@@ -16,9 +16,9 @@ services:
   db:
     image: postgres:17
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=app
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
     volumes:
       - db_data:/var/lib/postgresql/data
     networks:
